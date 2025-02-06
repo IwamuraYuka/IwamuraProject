@@ -1,0 +1,20 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="CameraSwitcher">
+			<method name="SwitchCamera"/>
+		</type>
+		<type fullname="ClearSceneController">
+			<method name="ReturnStartWindowClear"/>
+		</type>
+		<type fullname="GameOverContoroller">
+			<method name="Rechallenge"/>
+			<method name="ReturnStartWindow"/>
+		</type>
+		<type fullname="PlayerController">
+			<method name="Jump"/>
+		</type>
+		<type fullname="StartSceneDirector">
+			<method name="StartButtonDown"/>
+		</type>
+	</assembly>
+</linker>
