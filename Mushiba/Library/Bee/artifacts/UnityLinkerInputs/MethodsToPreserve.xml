@@ -1,0 +1,11 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="ClearSceneDirector">
+			<method name="GameButtonDown"/>
+			<method name="StartButtonDown"/>
+		</type>
+		<type fullname="StartDirector">
+			<method name="StartButtonDown"/>
+		</type>
+	</assembly>
+</linker>
