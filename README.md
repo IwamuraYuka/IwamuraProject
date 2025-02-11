@@ -26,8 +26,8 @@ Shift+移動キー：ダッシュ
 
 
 ★②Mushiba★
-・ゲームで遊ぶ場合→Bouken3D/GamePlay/Mushiba.exe
-・スクリプトの確認→Bouken3D/Assets/Script
+・ゲームで遊ぶ場合→Mushiba/GamePlay/Mushiba.exe
+・スクリプトの確認→Mushiba/Assets/Script
 ------------------------------------------------
 <制作物概要>
 湧いてくる虫歯菌をクリックしていくつ消せるかを試すゲーム。
