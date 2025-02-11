@@ -1927,6 +1927,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 5ccd567ba8dfc86428d5748245522bfb, type: 3}
   damage: {fileID: 8300000, guid: 0194782b1c6449c4e8053a546a9d1fbe, type: 3}
   vj: {fileID: 1518853945}
+  rotationSpeed: 5
 --- !u!54 &344973730
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6103,7 +6104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091648066
 RectTransform:
   m_ObjectHideFlags: 0

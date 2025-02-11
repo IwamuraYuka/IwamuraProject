@@ -3699,9 +3699,6 @@
     ],
     "forceIncludeModules": [],
     "forceExcludeModules": [
-        "ClusterInput",
-        "ClusterRenderer",
-        "NVIDIA",
-        "VirtualTexturing"
+        "NVIDIA"
     ]
 }

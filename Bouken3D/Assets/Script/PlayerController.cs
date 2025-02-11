@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,11 +17,13 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
 
 
-    //Joystickİ’è
+    //Joystickè¨­å®š
     private Vector3 m_Direction;
     [SerializeField] VariableJoystick vj;
     private float c = 2.0f;
 
+    // å›è»¢é€Ÿåº¦
+    public float rotationSpeed = 5.0f;
 
 
 
@@ -35,15 +37,16 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
         animator.SetBool("death", false);
         animator.SetBool("eyes_Dead", false);
+
     }
 
     void Update()
     {
-        //’Êí‚Ì•à‚­‘¬“x
+        //é€šå¸¸ã®æ­©ãé€Ÿåº¦
         this.walkForce = 3.0f;
 
 
-        //ƒQ[ƒ€ŠJn‚µ‚Ä‚©‚çƒvƒŒƒCƒ„[‘€ì‰Â”\
+        //ã‚²ãƒ¼ãƒ é–‹å§‹ã—ã¦ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ“ä½œå¯èƒ½
         if (GameController.startTime < 0 && !EnemyContoroller.attack)
         {
             if (!isJumping)
@@ -64,12 +67,12 @@ public class PlayerController : MonoBehaviour
 
             if (isJumping && vj.Vertical < 0)
             {
-                Debug.Log("Œ¸—Í”­“®");
+                Debug.Log("æ¸›åŠ›ç™ºå‹•");
                 this.rigidBody.AddForce(-transform.forward * 10.0f);
             }
         }
 
-        //UŒ‚‚ğó‚¯‚½‚çƒQ[ƒ€ƒI[ƒo[
+        //æ”»æ’ƒã‚’å—ã‘ãŸã‚‰ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
         if (EnemyContoroller.attack)
         {
             rigidBody.velocity = Vector3.zero;
@@ -87,40 +90,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //ƒvƒŒƒCƒ„[‚Ì“®‚«
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ã
     private void PlayerMovePC()
     {
 
         animator.SetBool("walk", false);
         animator.SetBool("jump", false);
 
-        //ƒ_ƒbƒVƒ…(D‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ)
+        //ãƒ€ãƒƒã‚·ãƒ¥(ShiftãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹é–“)
         if (Input.GetKey(KeyCode.LeftShift))
         {
             this.walkForce = dashForce;
 
         }
 
-        //////////ƒƒCƒ“ƒJƒƒ‰‚ªƒIƒ“‚Ìê‡
+        //////////ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ãŒã‚ªãƒ³ã®å ´åˆ
         if (CameraSwitcher.mainOn)
         {
-            //‘O‚ÖˆÚ“®
+            //å‰ã¸ç§»å‹•
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
 
-                //•à‚­ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+                //æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
                 animator.SetBool("walk", true);
                 rigidBody.velocity = transform.forward * walkForce;
                 transform.Rotate(new Vector3(0, 0, 0));
 
-                /*if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    transform.Rotate(new Vector3(0, 0, 0));
-                    rigidBody.velocity = transform.forward * walkForce;
-                }*/
             }
 
-            //Œã‚ë‚ğŒü‚­
+            //å¾Œã‚ã‚’å‘ã
             if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
 
@@ -130,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            // ‰E‚ÖˆÚ“® 
+            // å³ã¸ç§»å‹• 
             if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
 
@@ -140,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            // ¶‚ÖˆÚ“®
+            // å·¦ã¸ç§»å‹•
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("walk", true);
@@ -148,24 +146,24 @@ public class PlayerController : MonoBehaviour
 
 
             }
-        }//////////ƒTƒuƒJƒƒ‰‚ªƒIƒ“‚Ìê‡
+        }//////////ã‚µãƒ–ã‚«ãƒ¡ãƒ©ãŒã‚ªãƒ³ã®å ´åˆ
         else
         {
-            //‘O‚ÖˆÚ“®
+            //å‰ã¸ç§»å‹•
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
-                //•à‚­ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+                //æ­©ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
                 animator.SetBool("walk", true);
                 rigidBody.velocity = transform.forward * walkForce;
 
                 if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
                 {
-                    transform.eulerAngles=new Vector3(0, 180, 0);
+                    transform.eulerAngles = new Vector3(0, 180, 0);
                     rigidBody.velocity = transform.forward * walkForce;
                 }
             }
 
-            //Œã‚ë‚ğŒü‚­
+            //å¾Œã‚ã‚’å‘ã
             if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
 
@@ -175,17 +173,17 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            // ‰E‚ÖˆÚ“® 
+            // å³ã¸ç§»å‹• 
             if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
 
                 animator.SetBool("walk", true);
-                transform.Rotate(new Vector3(0, -20, 0)*Time.deltaTime);
+                transform.Rotate(new Vector3(0, -20, 0) * Time.deltaTime);
 
 
             }
 
-            // ¶‚ÖˆÚ“®
+            // å·¦ã¸ç§»å‹•
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("walk", true);
@@ -195,61 +193,54 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //ˆÚ“®‚ÉƒI[ƒfƒBƒIÄ¶
+        //ç§»å‹•æ™‚ã«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªå†ç”Ÿ
         if (Input.GetKey(KeyCode.LeftArrow) ||
                 Input.GetKey(KeyCode.RightArrow) ||
                 Input.GetKey(KeyCode.UpArrow))
-            {
-                audioSource.PlayOneShot(walkSound);
-            }
-
+        {
+            audioSource.PlayOneShot(walkSound);
         }
+
+    }
+
 
     private void PlayerMoveMoba()
     {
-        //joyStick‚Ì‘€ì
-        if(vj.Vertical!=0 && vj.Horizontal != 0)
+        // ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®æ“ä½œ
+        m_Direction = new Vector3(vj.Horizontal, 0, vj.Vertical);
+
+        if (m_Direction.magnitude > 0.1f)
         {
-            //ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+            // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
             animator.SetBool("walk", true);
             animator.SetBool("jump", false);
-            rigidBody.velocity = m_Direction * dashForce;
-            transform.localRotation = Quaternion.LookRotation(m_Direction);
 
-            if (CameraSwitcher.mainOn)
-            {
-                m_Direction = Vector3.forward * vj.Vertical + Vector3.right * vj.Horizontal;
-            }
-            else
-            {
-                m_Direction = Vector3.forward * -vj.Vertical + Vector3.right * -vj.Horizontal;  
-            }
-          
-            
-            Debug.Log("ƒo[ƒeƒBƒJƒ‹" + vj.Vertical + "ƒzƒ‰ƒCƒ]ƒ“‚½‚é" + vj.Horizontal);
+            // ç§»å‹•é€Ÿåº¦ã®è¨­å®š
+            rigidBody.velocity = m_Direction.normalized * dashForce;
+
+            // ç§»å‹•æ–¹å‘ã«æ»‘ã‚‰ã‹ã«å›è»¢
+            Quaternion targetRotation = Quaternion.LookRotation(m_Direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
         else
         {
+            // ã‚¸ãƒ§ã‚¤ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒå…¥åŠ›ã•ã‚Œã¦ã„ãªã„å ´åˆ
             if (!Input.anyKey)
             {
                 animator.SetBool("walk", false);
                 animator.SetBool("jump", false);
             }
-
-           
         }
-
-
     }
 
     public void Jump()
     {
-        //ƒWƒƒƒ“ƒv‚·‚é
+        //ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹
 
         //rigidBody.constraints = RigidbodyConstraints.None;
         if (!isJumping)
         {
-            Debug.Log("ƒWƒƒƒ“ƒv");
+            Debug.Log("ã‚¸ãƒ£ãƒ³ãƒ—");
             this.rigidBody.AddForce(transform.up * this.jumpForce);
             animator.SetBool("walk", false);
             animator.SetBool("jump", true);
@@ -261,10 +252,10 @@ public class PlayerController : MonoBehaviour
 
         private void OnCollisionEnter(Collision collision)
         {
-            //’n–Ê‚ÆÚ‚µ‚Ä‚¢‚½‚çƒWƒƒƒ“ƒv
+            //åœ°é¢ã¨æ¥ã—ã¦ã„ãŸã‚‰ã‚¸ãƒ£ãƒ³ãƒ—
             if (collision.gameObject.tag == "Terrain")
             {
-            Debug.Log("’n–Ê‚ÆÚ‚µ‚Ä‚¢‚é");
+            Debug.Log("åœ°é¢ã¨æ¥ã—ã¦ã„ã‚‹");
                 isJumping = false;
                 
 
@@ -274,10 +265,10 @@ public class PlayerController : MonoBehaviour
 
         private void OnCollisionExit(Collision collision)
         {
-            //’n–Ê‚©‚ç—£‚ê‚Ä‚¢‚éŠÔ‚ÍƒWƒƒƒ“ƒv‹Ö~
+            //åœ°é¢ã‹ã‚‰é›¢ã‚Œã¦ã„ã‚‹é–“ã¯ã‚¸ãƒ£ãƒ³ãƒ—ç¦æ­¢
             if (collision.gameObject.name == "Terrain")
             {
-                Debug.Log("’n–Ê‚Æ—£‚ê‚Ä‚¢‚é");
+                Debug.Log("åœ°é¢ã¨é›¢ã‚Œã¦ã„ã‚‹");
                 isJumping = true;
             }
         }
@@ -287,13 +278,13 @@ public class PlayerController : MonoBehaviour
 
         private void Death()
         {
-            //ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
             animator.SetBool("walk", false);
             animator.SetBool("jump", false);
             animator.SetBool("death", true);
             animator.SetBool("eyes_Dead", true);
             animator.SetTrigger("eyes_Death_Trigger");
-            Debug.Log("ƒQ[ƒ€ƒI[ƒo[");
+            Debug.Log("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼");
         }
             
         
