@@ -1,5 +1,5 @@
 【①Bouken3D】
-・ゲームで遊ぶ場合→Bouken3D/
+・ゲームで遊ぶ場合→Bouken3D/GamePlay/TokaGet.exe
 ・スクリプトの確認→Bouken3D/Assets/Script
 ------------------------------------------------
 <制作物概要>
